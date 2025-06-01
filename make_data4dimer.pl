@@ -25,7 +25,7 @@ my $step = 15;#step of distance
 `mkdir $store_path`;
 ###parameters to set first
 
-my @elements = ("Al", "Co", "Cr", "Fe", "Mo", "Nb", "Ni", "Ta", "Ti", "W");#base elements for pair
+my @elements = ("Al", "P");#base elements for pair
 my $json;
 {
     local $/ = undef;
@@ -90,7 +90,8 @@ for my $ele (@combinations){
 
     for my $s (0..$step){
         my $d = $distance + $s * $increment;# x coordinate of atom 2
-        my $filename = $ele1 . "_". $ele2 . "_dimer$s.data";
+        my $id = sprintf("%02d", $s + 1);#id of dimer
+        my $filename = $ele1 . "_". $ele2 . "_dimer$id.data";
         my %heredoc_para = (
             output_file => "$store_path/$filename",
             mass => $mass,
