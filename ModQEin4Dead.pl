@@ -36,7 +36,7 @@ my %para =(#you may set QE parameters you want to modify here. Keys should be th
     disk_io => '"/dev/null"',
     degauss =>   0.035,
     smearing => '"gaussian"',
-    conv_thr =>   "2.d-6",
+    conv_thr =>   "2.d-5",
     mixing_beta =>   0.7,
     mixing_mode => '"plain"',# !'local-TF'
     mixing_ndim => 8,# !set 4 or 3 if OOM-killer exists (out of memory), default 8
@@ -47,8 +47,8 @@ my %para =(#you may set QE parameters you want to modify here. Keys should be th
 
 my @keys = keys %para;#get all keys 
 #/home/jsp/make_B2_related_data/QEjobs_status/Dead.txt;
-my @allQEin = `grep -v '^[[:space:]]*\$' $currentPath/QEjobs_status/Dead.txt| grep -v '#'`;#all dead QE cases
-#my @allQEin = `grep -v '^[[:space:]]*\$' $currentPath/QEjobs_status/Dead.txt| grep -v '#'|awk '{print \$2}'`;#all dead QE cases
+#my @allQEin = `grep -v '^[[:space:]]*\$' $currentPath/QEjobs_status/Dead.txt| grep -v '#''`;#all dead QE cases
+my @allQEin = `grep -v '^[[:space:]]*\$' $currentPath/QEjobs_status/Dead.txt| grep -v '#'|awk '{print \$2}'`;#all dead QE cases
 map { s/^\s+|\s+$//g; } @allQEin;
 my $count = 0;
 for my $f (@allQEin){
