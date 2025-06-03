@@ -49,7 +49,7 @@ my $here_doc =<<"END_MESSAGE";
 #SBATCH --nodes=$sbatch_para{nodes}
 #SBATCH --cpus-per-task=$sbatch_para{threads}
 #SBATCH --partition=$sbatch_para{partition}
-##SBATCH --reservation=script_test  #you may need to change it to your own reservation
+#SBATCH --reservation=script_test  #you may need to change it to your own reservation
 ##SBATCH --ntasks-per-node=12
 ##SBATCH --exclude=node23
 #source /opt/intel/oneapi/setvars.sh

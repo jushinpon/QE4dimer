@@ -351,13 +351,13 @@ $QE_hr->{starting_magnetization}
 nspin = 2
 /
 &ELECTRONS
-conv_thr =   2.d-6
+conv_thr =   1.d-5
 electron_maxstep = 500
-mixing_beta =   0.7
+mixing_beta =   0.3
 mixing_mode = 'plain' !'local-TF'
 mixing_ndim = 8 !set 4 or 3 if OOM-killer exists (out of memory)
 diagonalization = 'david' !set cg if if OOM-killer exists (out of memory). other types can be used for scf problem.
-diago_david_ndim = 2 !If david is used for diagonalization. set 2 if OOM-killer appears.
+diago_david_ndim = 4 !If david is used for diagonalization. set 2 if OOM-killer appears.
 /
 &IONS
 ion_dynamics = "beeman"

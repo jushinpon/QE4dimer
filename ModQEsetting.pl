@@ -19,16 +19,17 @@ my %para =(#you may set QE parameters you want to modify here. Keys should be th
     dt => 20,
     etot_conv_thr => "1.0d-5",#perl not know d-5, make it a string 
     forc_conv_thr => "1.0d-4",
+    conv_thr => "1.0d-8",
     disk_io => '"none"',
     degauss =>   0.035,
     smearing => '"gaussian"',
     conv_thr =>   "2.d-6",
-    mixing_beta =>   0.2,
+    mixing_beta =>   0.3,
     mixing_mode => '"plain"',# !'local-TF'
     mixing_ndim => 8,# !set 4 or 3 if OOM-killer exists (out of memory)
     diagonalization => '"david"',#!set cg if if OOM-killer exists (out of memory). other types can be used for scf problem.
-    diago_david_ndim => 2,
-    electron_maxstep => 300
+    diago_david_ndim => 4,
+    electron_maxstep => 500
 );
 
 my @keys = keys %para;#get all keys 

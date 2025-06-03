@@ -18,8 +18,8 @@ use elements;#all setting package
 use Math::BigFloat;
 my $currentPath = getcwd();
 my $store_path = "$currentPath/dimer_data";#store path
-my $max_distance = 8.5 ;
 my $step = 15;#step of distance
+#my $max_distance;
 #####################
 `rm -rf $store_path`;
 `mkdir $store_path`;
@@ -41,7 +41,7 @@ my $decoded = decode_json($json);
 my %radius;
 
 for my $ele (@elements) {
-    $radius{$ele} = $decoded->{$ele}->{radius};#get radius from json
+    $radius{$ele} = $decoded->{$ele}->{calculated_radius};#get radius from json
     die "No information of atomic radius of element $ele in perodic_table.json\n" unless ($radius{$ele});
     print "radius of $ele: $radius{$ele}\n";#print radius
 }
@@ -52,8 +52,9 @@ my @combinations;
 for my $i (0 .. $#elements) {
     for my $j (0 .. $#elements) {
         if ($i <= $j) {
-        my $radus_sum = ($radius{$elements[$i]} + $radius{$elements[$j]})*0.8;#shorter    
-        push @combinations, [$elements[$i], $elements[$j],$radus_sum];
+        my $max_distance = ($radius{$elements[$i]} + $radius{$elements[$j]})*2.0;#longer
+        my $radus_sum = ($radius{$elements[$i]} + $radius{$elements[$j]})*0.6;#shorter    
+        push @combinations, [$elements[$i], $elements[$j],$radus_sum,$max_distance];
         }
     }
 }
@@ -61,14 +62,14 @@ for my $i (0 .. $#elements) {
 
 # Print combinations
 for my $pair (@combinations) {
-    print "pair and starting distance: @$pair\n";
+    print "pair, starting distance and max distance: @$pair\n";
 }
 
 for my $ele (@combinations){
     my $ele1 = $ele->[0];
     my $ele2 = $ele->[1];
     my $distance = $ele->[2];
-
+    my $max_distance = $ele->[3];
     my %ntype;
     $ntype{$ele1} = 1;
     $ntype{$ele2} = 1;
@@ -115,7 +116,7 @@ my $hereinput = <<"END_MESSAGE";
 2  atoms
 $heredoc_hr->{ntype}  atom types
  
-0.000000000000      18.0000000000000  xlo xhi
+0.000000000000      26.0000000000000  xlo xhi
 0.000000000000      12.0000000000000  ylo yhi
 0.000000000000      12.0000000000000  zlo zhi
  
