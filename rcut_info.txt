@@ -1,5 +1,0 @@
-Fitted epsilon (eV): 0.010000
-Fitted sigma (Å): 3.400000
-Minimum energy distance r_min (Å): 3.8158
-rcut (Å) where |E| < 1 meV beyond r_min: 6.2613
-Suggested rcut_smth = rcut - r_min: 2.4455
