@@ -12,6 +12,8 @@
 
 * **Element Data Handling**: The `elements.pm` module and `periodic_table.json` file offer elemental data support for input generation.
 
+* **Get suggested rcut and rcut_smth**: try post_processing.pl
+
 ## Prerequisites
 
 * **Perl**: Ensure that Perl is installed on your system.
