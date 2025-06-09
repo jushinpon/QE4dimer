@@ -26,7 +26,7 @@ my $step = 15;#step of distance
 `mkdir $store_path`;
 ###parameters to set first
 
-my @elements = ("Al", "P");#base elements for pair
+my @elements = ("Cu","Ag","Al", "P", "C","N","O","H");#base elements for pair
 my $json;
 {
     local $/ = undef;
@@ -55,12 +55,22 @@ for my $i (0 .. $#elements) {
         if ($i <= $j) {
             my $is_metal_i = is_metal($elements[$i]);
             my $is_metal_j = is_metal($elements[$j]);
+            #print "elements[$i]: $elements[$i], elements[$j]: $elements[$j]\n";
+            #print "is_metal_i: $is_metal_i, is_metal_j: $is_metal_j\n\n";
             unless($is_metal_i && $is_metal_j) {#both are not metals
+                print "category 1: both are not metals\n";
+                print "elements[$i]: $elements[$i], elements[$j]: $elements[$j]\n";
+                print "is_metal_i: $is_metal_i, is_metal_j: $is_metal_j\n\n";
+                #category 1: 
                 my $max_distance = ($radius{$elements[$i]} + $radius{$elements[$j]})*1.5;#longer
                 my $radus_sum = ($radius{$elements[$i]} + $radius{$elements[$j]})*0.5;#shorter    
                 push @combinations, [$elements[$i], $elements[$j],$radus_sum,$max_distance];
             }
             else{# at least one is metal
+                print "category 2: at least one is metal\n";
+                print "elements[$i]: $elements[$i], elements[$j]: $elements[$j]\n";
+                print "is_metal_i: $is_metal_i, is_metal_j: $is_metal_j\n\n";
+                #category 2:  are not metals\n";
                 my $max_distance = ($radius{$elements[$i]} + $radius{$elements[$j]})*1.2;#longer
                 my $radus_sum = ($radius{$elements[$i]} + $radius{$elements[$j]})*0.3;#shorter    
                 push @combinations, [$elements[$i], $elements[$j],$radus_sum,$max_distance];
