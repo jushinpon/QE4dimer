@@ -15,6 +15,7 @@ use POSIX;
 use Parallel::ForkManager;
 use lib './';#assign pm dir
 use elements;#all setting package
+use is_metalCheck qw(is_metal);#check if element is metal
 use Math::BigFloat;
 my $currentPath = getcwd();
 my $store_path = "$currentPath/dimer_data";#store path
@@ -52,9 +53,19 @@ my @combinations;
 for my $i (0 .. $#elements) {
     for my $j (0 .. $#elements) {
         if ($i <= $j) {
-        my $max_distance = ($radius{$elements[$i]} + $radius{$elements[$j]})*2.0;#longer
-        my $radus_sum = ($radius{$elements[$i]} + $radius{$elements[$j]})*0.6;#shorter    
-        push @combinations, [$elements[$i], $elements[$j],$radus_sum,$max_distance];
+            my $is_metal_i = is_metal($elements[$i]);
+            my $is_metal_j = is_metal($elements[$j]);
+            unless($is_metal_i && $is_metal_j) {#both are not metals
+                my $max_distance = ($radius{$elements[$i]} + $radius{$elements[$j]})*1.5;#longer
+                my $radus_sum = ($radius{$elements[$i]} + $radius{$elements[$j]})*0.5;#shorter    
+                push @combinations, [$elements[$i], $elements[$j],$radus_sum,$max_distance];
+            }
+            else{# at least one is metal
+                my $max_distance = ($radius{$elements[$i]} + $radius{$elements[$j]})*1.2;#longer
+                my $radus_sum = ($radius{$elements[$i]} + $radius{$elements[$j]})*0.3;#shorter    
+                push @combinations, [$elements[$i], $elements[$j],$radus_sum,$max_distance];
+            }
+           
         }
     }
 }
