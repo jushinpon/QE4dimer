@@ -148,7 +148,7 @@ $heredoc_hr->{mass}
 Atoms 
  
 1    1    0.0  0.0  0.0
-1    $heredoc_hr->{ntype}  $heredoc_hr->{x_atom2} 0.0  0.0
+2    $heredoc_hr->{ntype}  $heredoc_hr->{x_atom2} 0.0  0.0
 END_MESSAGE
 
 my $file = $heredoc_hr->{output_file};
